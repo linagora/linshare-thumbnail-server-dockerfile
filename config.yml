@@ -5,3 +5,11 @@ server:
     adminConnectors:
         - type: http
           port: 8081
+logging:
+  level: INFO
+  loggers:
+    org.linagora.linshare.thumbnail.server: INFO
+  appenders:
+  - type: console
+    threshold: WARN
+    target: stderr
