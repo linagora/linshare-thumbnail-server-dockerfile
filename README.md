@@ -35,6 +35,8 @@ Test
 ----
 
 ```console
+curl -i 'http://localhost:8080/linthumbnail/?mimeType=image/png'
+
 curl -i 'http://localhost:8080/linthumbnail/?mimeType=image/png' -X POST \
     -H "Content-Type: multipart/form-data" \
     -F"file=@Tux-G2b.png" \
