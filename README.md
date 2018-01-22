@@ -29,6 +29,7 @@ Stable `releases` channel is selected by default.
 ```console
 $ docker build --build-arg VERSION=2.0.0 --build-arg CHANNEL=releases -t linshare-thumbnail-server .
 $ docker build --build-arg VERSION=2.0.0-SNAPSHOT --build-arg CHANNEL=snapshots -t linshare-thumbnail-server .
+$ docker run -p8080:8080 -p 8081:8081 linshare-thumbnail-server
 ```
 
 Test
@@ -37,8 +38,5 @@ Test
 ```console
 curl -i 'http://localhost:8080/linthumbnail/?mimeType=image/png'
 
-curl -i 'http://localhost:8080/linthumbnail/?mimeType=image/png' -X POST \
-    -H "Content-Type: multipart/form-data" \
-    -F"file=@Tux-G2b.png" \
-    --output /tmp/preview.multipart.binary
+curl -i 'http://localhost:8080/linthumbnail/?mimeType=image/png' -X POST -H "Content-Type: multipart/form-data" -F"file=@Tux-G2b.png" --output /tmp/preview.multipart.binary
 ```
