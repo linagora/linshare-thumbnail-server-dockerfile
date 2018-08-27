@@ -10,7 +10,8 @@ ARG CHANNEL="releases"
 ARG EXT="com"
 
 WORKDIR /usr/local/sbin/
-RUN mkdir -p /etc/linshare-thumbnail-server
+RUN mkdir -p /etc/linshare-thumbnail-server /tmp/linshare
+VOLUME /tmp/linshare
 COPY config.yml /etc/linshare-thumbnail-server/
 
 RUN apt-get update && apt-get install -y libreoffice
@@ -24,4 +25,4 @@ sed -i 's#^\(.*\)#\1\tlinshare-thumbnail-server.jar#' linshare-thumbnail-server.
 sha1sum -c linshare-thumbnail-server.jar.sha1 --quiet && rm -f linshare-thumbnail-server.jar.sha1
 
 
-ENTRYPOINT ["java", "-jar", "/usr/local/sbin/linshare-thumbnail-server.jar", "server", "/etc/linshare-thumbnail-server/config.yml"]
+ENTRYPOINT ["java", "-jar", "-Djava.io.tmpdir=/tmp/linshare", "/usr/local/sbin/linshare-thumbnail-server.jar", "server", "/etc/linshare-thumbnail-server/config.yml"]
